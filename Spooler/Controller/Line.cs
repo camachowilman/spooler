@@ -265,8 +265,8 @@ namespace Spooler.Controller
 
 
                 if (_record.Printed)
-                    UpdateRecordFromAPI(_record.Id, _record.DocumentNumber, "");
-                //UpdateRecord(_record.Id, _record.DocumentNumber, "");
+                    UpdateRecord(_record.Id, _record.DocumentNumber);
+                //UpdateRecordFromAPI(_record.Id, _record.DocumentNumber, "");
 
 
                 System.Threading.Thread.Sleep(500);
@@ -340,22 +340,26 @@ namespace Spooler.Controller
 
         }
 
-        private void UpdateRecord(int id, string numberDocument, string printedNote)
+        private void UpdateRecord(int id, string numberDocument)
         {
             try
             {
-                if (Connect())
+                using (SqlConnection connection = new SqlConnection(Spooler.Parameters.ConnectionString))
                 {
-                    NpgsqlCommand _cmd = new NpgsqlCommand();
-                    _cmd.CommandText = "select updateline(:id,:numberdocument,:printednote)";
-                    _cmd.Parameters.AddWithValue("@id", NpgsqlTypes.NpgsqlDbType.Integer, id);
-                    _cmd.Parameters.AddWithValue("@numberdocument", NpgsqlTypes.NpgsqlDbType.Varchar, numberDocument);
-                    _cmd.Parameters.AddWithValue("@printednote", NpgsqlTypes.NpgsqlDbType.Varchar, printedNote);
-                    _cmd.CommandType = CommandType.Text;
-                    _cmd.Connection = _conection;
-                    _cmd.ExecuteNonQuery();
-                    _conection.Close();
+                    connection.Open();
+                    using (SqlCommand comando = new SqlCommand("USP_ACT_COLAIMPRESION"))
+                    {
+                        comando.Connection = connection;
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.Add(new SqlParameter("@ID", id));
+                        comando.Parameters.Add(new SqlParameter("@VNUMEROIMPRESION", numberDocument));
+                        comando.ExecuteNonQuery();
+
+                    }
+                    connection.Close();
+                    
                 }
+
             }
             catch (Exception ex)
             {
