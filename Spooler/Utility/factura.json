@@ -1,0 +1,44 @@
+{
+  "Cliente": {
+    "Rif": "V16442063",
+    "RazonSocial": "Wilman Camacho",
+    "DireccionFiscal": "Calle 6 Santa Isabel"
+  },
+  "Productos": [
+    {
+      "Codigo": "001",
+      "Descripcion": "Acetaminofen",
+      "Cantiad": 2,
+      "Precio": 64.5,
+      "Impuesto": "16.0"
+    },
+    {
+      "Codigo": "002",
+      "Descripcion": "Diclofenac",
+      "Cantiad": 1,
+      "Precio": 70.3,
+      "Impuesto": "16.0"
+    },
+    {
+      "Codigo": "003",
+      "Descripcion": "Brugesic",
+      "Cantiad": 1,
+      "Precio": 40.2,
+      "Impuesto": "0"
+    }
+  ],
+  "Pagos": [
+    {
+      "Codigo": "1",
+      "Descripcion": "Efectivo",
+      "Monto": 10.0
+    },
+    {
+      "Codigo": "2",
+      "Descripcion": "Punto",
+      "Monto": 25.0
+    }
+  ],
+  "Referencia": null,
+  "Observacion": ""
+}
