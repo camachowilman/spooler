@@ -1043,6 +1043,7 @@ namespace Spooler.HKA
         {
             try
             {
+                // ESTO DA ERROR. NO SE USA. REVISAR LOGICA
                 bool result = false;
                 result = SendCommand("@" + LenString(_comment, 0, 20), false);
                 return result;

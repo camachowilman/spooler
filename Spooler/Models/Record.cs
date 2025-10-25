@@ -123,7 +123,7 @@ namespace Spooler.Models
                     foreach (Product _product in Document.Products)
                     {
                         Printer.SendItemInvoice(_product.Name, _product.Tax, _product.Quantity, _product.Price);
-                        Printer.SendComment(_product.Comment);
+                        //Printer.SendComment(_product.Comment);
                     }
 
                     Printer.CloseInvoice();
@@ -194,16 +194,21 @@ namespace Spooler.Models
                             int _lastInvoiceNumberInSpooler = 0;
                             int.TryParse(_lastInvoice.DocumentNumber, out _lastInvoiceNumberInSpooler);
 
-                            // caso en que la factura impresa anteriormente no se grabo en bd
-                            if (_before > _lastInvoiceNumberInSpooler)
+                            if (_lastInvoiceNumberInSpooler != - 1)// primera factura
                             {
-                                Spooler.Models.Logger.loggerMessege("Advertencia: Factura impresa que no esta en BD: "+ _before.ToString());
-    
-                                this.DocumentNumber = _before.ToString();
-                                this.Printed = true;
-                                return true;
-                                
-                            }                                
+
+                                // caso en que la factura impresa anteriormente no se grabo en bd
+                                if (_before > _lastInvoiceNumberInSpooler)
+                                {
+                                    Spooler.Models.Logger.loggerMessege("Advertencia: Factura impresa que no esta en BD: " + _before.ToString());
+
+                                    this.DocumentNumber = _before.ToString();
+                                    this.Printed = true;
+                                    return true;
+
+                                }
+                            }
+                                                      
 
                         }
 

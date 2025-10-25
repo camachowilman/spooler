@@ -64,9 +64,9 @@ namespace Spooler.Controller
             try
             {
                 string _serial = "";
-               // _serial = Spooler.HKA.Printer.GetSerialNumber();  // habilitar 
+                _serial = Spooler.HKA.Printer.GetSerialNumber();  // habilitar 
 
-                _serial = Spooler.Parameters.PrinterName; // quitar
+               // _serial = Spooler.Parameters.PrinterName; // quitar
 
                 if (_serial != "")
                     return _serial;
