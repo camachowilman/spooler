@@ -85,7 +85,7 @@ namespace Spooler
 
             try
             {
-                ConnectionString = ConfigurationManager.ConnectionStrings["datos"].ConnectionString;
+                ConnectionString = ConfigurationManager.ConnectionStrings["tserver"].ConnectionString;
                 if (ConnectionString == "")
                     {
                     Console.WriteLine("Error: ConnectionString no definido en app.config");
